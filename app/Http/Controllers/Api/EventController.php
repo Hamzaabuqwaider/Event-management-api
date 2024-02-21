@@ -31,7 +31,7 @@ class EventController extends Controller
                 'name' => 'required|string|max:255|unique:events,name',
                 'description' => 'nullable|string',
                 'start_time' => 'required|date',
-                'end_time' => 'sometimes|date|after:start_time'
+                'end_time' => 'required|date|after:start_time'
             ]),
             'user_id' =>1
         ]);
