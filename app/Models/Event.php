@@ -26,6 +26,7 @@ class Event extends Model
 
     use HasFactory;
     const ID = 'id';
+    const USER_ID = 'user_id';
     const NAME = 'name';
     const DESCRIPTION = 'description';
     const CREATED_AT = 'created_at';
@@ -36,6 +37,7 @@ class Event extends Model
 
     protected $casts = [
         self::ID => 'int',
+        self::USER_ID => 'int',
         self::NAME => 'string',
         self::DESCRIPTION => 'string',
         self::CREATED_AT => 'date',
@@ -46,6 +48,7 @@ class Event extends Model
 
     protected $fillable = [
         self::NAME,
+        self::USER_ID,
         self::DESCRIPTION,
         self::START_TIME,
         self::END_TIME
