@@ -7,17 +7,20 @@ use App\Http\Resources\Api\EventResource;
 use App\Http\Traits\CanLoadRelationShips;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class EventController extends Controller
 {
     use CanLoadRelationShips;
+
     /**
      * Display a listing of the resource.
      */
 
     public function __construct()
     {
-//        $this->middleware('auth:sanctum')->except(['index','show']);
+        $this->middleware('auth:sanctum')->except(['index','show']);
+        $this->authorizeResource(Event::class, 'event');
     }
 
     public function index()
@@ -73,6 +76,11 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
+//        if (Gate::denies('update-event', $event)) {
+//            abort(403 , 'Ypu not authorize');
+//        }
+
+        $this->authorize('update-event',$event);
         $event->update(
             $request->validate([
                 'name' => 'sometimes|string|max:255',
