@@ -7,7 +7,6 @@ use App\Http\Resources\Api\EventResource;
 use App\Http\Traits\CanLoadRelationShips;
 use App\Models\Event;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
 class EventController extends Controller
 {
@@ -20,7 +19,7 @@ class EventController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum')->except(['index','show']);
-//        $this->authorizeResource(Event::class, 'event');
+        $this->authorizeResource(Event::class, 'event');
     }
 
     public function index()
